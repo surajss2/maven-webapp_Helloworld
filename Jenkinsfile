@@ -1,17 +1,28 @@
 pipeline {
     agent any
-    tools {
-        maven M2_MAVEN 
-        }
-      
+    tools{
+        maven 'M2_MAVEN'
+    }
+     
     stages {
-        stage(' project build') {
+        stage('clean the project') {
             steps {
-                sh 'mvn clean install package'
+                sh 'mvn clean'
             }
         }
-        stage("Push the docker image to docker Hub"){
+        stage("Build the project"){
             steps {
+                sh ' mvn install package'
+            }
+            post {
+                success {
+                    echo "Archieving the Artifact"
+                    archiveArtifacts Artifacts: '**/target/*.war'
+                }
+                }
+        }
+        stage("deploying stage"){
+             steps {
                 nexusArtifactUploader artifacts: [
                     [
                         artifactId: 'my-app', 
@@ -25,10 +36,12 @@ pipeline {
                 nexusUrl: '192.168.30.142:8081', 
                 nexusVersion: 'nexus3', protocol: 'http',
                 repository: 'simpleapp-maven', version: '3.0-SNAPSHOT'
+                
+                
+
             }
+
         }
-        
-                        
     }
     
 }
