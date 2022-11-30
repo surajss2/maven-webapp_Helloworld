@@ -14,12 +14,7 @@ pipeline {
             steps {
                 sh ' mvn install package'
             }
-            post {
-                success {
-                    echo "Archieving the Artifact"
-                    archiveArtifacts Artifacts: '**/target/*.war'
-                }
-                }
+           
         }
         stage("deploying stage"){
              steps {
