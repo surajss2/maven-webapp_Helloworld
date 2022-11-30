@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage(' project build') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean install package'
             }
         }
         stage("Push the docker image to docker Hub"){
