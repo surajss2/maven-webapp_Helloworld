@@ -22,7 +22,7 @@ pipeline {
                     [
                         artifactId: 'my-app', 
                         classifier: '', 
-                        file: '/var/lib/jenkins/workspace/Jenkins-nexus-project/target/*.war', 
+                        file: '/var/lib/jenkins/workspace/Jenkins-nexus-project/target/demo.war', 
                         type: 'war'
                     ]
                 ], 
