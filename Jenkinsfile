@@ -30,7 +30,7 @@ pipeline {
                 groupId: 'com.dme.app', 
                 nexusUrl: '192.168.30.142:8081', 
                 nexusVersion: 'nexus3', protocol: 'http',
-                repository: 'simpleapp-maven', version: '3.0'
+                    repository: 'simpleapp-maven', version: '3.${BUILD_ID}'
                 
                 
 
